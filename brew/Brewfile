@@ -1,57 +1,72 @@
 cask_args appdir: '/Applications'
 
-# Add taps
-tap 'caskroom/cask'
-tap 'pivotal/tap'
+# Taps
+tap "github/gh"
+tap "heroku/brew"
+tap "homebrew/bundle"
+tap "homebrew/cask"
+tap "homebrew/core"
+tap "homebrew/services"
+tap "pivotal/tap"
 
-# Python
-# (see https://github.com/pyenv/pyenv/wiki/Common-build-problems#prerequisites)
-brew 'pipenv'
-brew 'pyenv'
-brew 'readline'
-brew 'xz'
+# CLI Apps
+brew "xz"
+brew "awscli"
+brew "curl"
+brew "doctl"
+brew "gcc"
+brew "gh"
+brew "git"
+brew "helm"
+brew "htop"
+brew "httpie"
+brew "iperf3"
+brew "k3d"
+brew "kotlin"
+brew "lazygit"
+brew "mtr"
+brew "neovim"
+brew "node"
+brew "pandoc"
+brew "pipenv"
+brew "pyenv"
+brew "python"
+brew "sshuttle"
+brew "tilt"
+brew "tree"
+brew "wget"
+brew "yarn"
+brew "zsh"
+brew "heroku"
 
-# Javascript
-brew 'node'
-brew 'yarn'
-
-# Java
-cask 'java'
-brew 'maven'
-brew 'springboot'
-
-# Database
-brew 'postgresql'
-
-# CLI Utilities
-brew 'coreutils'
-brew 'curl'
-brew 'htop'
-brew 'httpie'
-brew 'iperf3'
-brew 'mtr'
-cask 'ngrok'
-brew 'tree'
-brew 'wget'
-brew 'zsh'
-
-# Softwares
-cask 'clamxav'
-cask 'dash'
-cask 'docker'
-cask 'figma'
-cask 'google-chrome'
-cask 'google-drive'
-cask 'hex-fiend'
-cask 'iterm2-beta'
-cask 'jetbrains-toolbox'
-cask 'little-snitch'
-cask 'macpass'
-cask 'mactex'
-cask 'notion'
-cask 'spectacle'
-cask 'sublime-text'
-cask 'telegram-desktop'
-cask 'typora'
-cask 'vlc'
-cask 'whatsapp'
+# Cask
+cask "clamxav"
+cask "cyberduck"
+cask "discord"
+cask "docker"
+cask "figma"
+cask "google-chrome"
+cask "google-cloud-sdk"
+cask "google-drive"
+cask "hex-fiend"
+cask "iterm2"
+cask "java"
+cask "jetbrains-toolbox"
+cask "little-snitch"
+cask "mactex"
+cask "mendeley"
+cask "ngrok"
+cask "notion"
+cask "onedrive"
+cask "postman"
+cask "scapple"
+cask "slack"
+cask "spectacle"
+cask "spotify"
+cask "sublime-text"
+cask "teamviewer"
+cask "telegram"
+cask "transmission"
+cask "visual-studio-code"
+cask "vlc"
+cask "whatsapp"

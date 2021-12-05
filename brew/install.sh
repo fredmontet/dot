@@ -14,7 +14,7 @@ fi
 
 # Run Homebrew through the Brewfile
 # Set global packages
-requirements=$ZSH/homebrew/Brewfile
+requirements=$ZSH/brew/Brewfile
 
 # Upgrade homebrew
 echo "› brew update"
