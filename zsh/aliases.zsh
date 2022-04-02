@@ -8,6 +8,8 @@ alias ...='cd ../..'
 
 alias cls='clear' # Good 'ol Clear Screen command
 
+alias src='cd ~/src'
+
 # Software aliases
 ##################
 
