@@ -35,7 +35,7 @@
 	helper = osxkeychain
 [user]
 	name = Frédéric Montet
-	email = frederic.montet@vast.ch
+	email = fredmontet@gmail.com
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
