@@ -1,7 +1,9 @@
 #!/bin/sh
+
+# `search` searches a directory for a string
 #
-# Quick search in a directory for a string ($@).
-#
+# :params args: query
+
 set -e
 
 # use -iru to search directories ack usually ignores (like .git)

@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# `install` Run all installers
+
+set -e
+
+cd "$(dirname $0)"
+
+echo "› Run all installers"
+find . -name install.sh 
+printf "\n"
+
+echo "› Start"
+find . -name install.sh -exec sh -c "{}" \;

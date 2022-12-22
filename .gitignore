@@ -1,7 +1,6 @@
 # Ignore sensitive informations
-system/keys.zsh
-git/gitconfig.local.symlink
+rel/os/keys.zsh
+rel/git/gitconfig.local.symlink
 
 # Ignore all environment variables
 **/env.zsh
-

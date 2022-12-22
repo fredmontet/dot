@@ -1,6 +1,6 @@
 # fredmontet's Dotfiles
 
-I like the way Zack Hohlman did organize his dotfiles (see https://github.com/holman/dotfiles), therefore I did a fork of his repository. Now, I use and tune it to my needs. Feel free to do the same, dotfiles are cool when organized and shared. :-)
+I like the way Zack Hohlman did organize his dotfiles (see https://github.com/holman/dotfiles), therefore I did a fork of his repository. And modified it over some years. Feel free to do the same, dotfiles are cool when organized and shared.
 
 Below is an explanation of how the code is structured.
 

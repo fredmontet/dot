@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# `reset` Reset macOS defaults
+
+exec $ZSH/rel/os/reset.sh

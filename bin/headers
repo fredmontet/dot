@@ -1,6 +1,10 @@
 #!/bin/sh
+
+# `headers` gives you the header of a website
+# 
+# source: https://github.com/rtomayko/dotfiles/blob/rtomayko/.local/bin/headers
 #
-# https://github.com/rtomayko/dotfiles/blob/rtomayko/.local/bin/headers
+# :params args: str of the website
 
 curl -sv "$@" 2>&1 >/dev/null |
   grep -v "^\*" |
