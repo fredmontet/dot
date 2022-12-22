@@ -1,5 +1,5 @@
 [user]
-        name = $AUTHOR_NAME
-        email = $AUTHOR_EMAIL
+        name = AUTHOR_NAME
+        email = AUTHOR_EMAIL
 [credential]
-        helper = $GIT_CREDENTIAL_HELPER
+        helper = GIT_CREDENTIAL_HELPER

@@ -43,5 +43,4 @@ export DOT=$HOME/.dot
 $DOT/rel/os/reset.sh
 
 # Install software
-echo "› $DOT/install"
 $DOT/run/install
