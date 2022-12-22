@@ -1,3 +1,2 @@
-# Install apps from the Mac App Store.
-echo "› sudo softwareupdate -i -a"
+# Install apps from the Mac App Store
 sudo softwareupdate -i -a

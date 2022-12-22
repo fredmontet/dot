@@ -122,4 +122,5 @@ setup_dot () {
 setup_git
 setup_dot
 
-success '› All installed!'
+success 'Setup completed'
+echo ''
