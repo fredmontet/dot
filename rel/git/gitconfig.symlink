@@ -5,9 +5,8 @@
         protocol = https
 [alias]
         co = checkout
-        promote = !$ZSH/bin/git-promote
-        wtf     = !$ZSH/bin/git-wtf
-        rank-contributors = !$ZSH/bin/git-rank-contributors
+        promote = !$DOT/bin/git-promote
+        wtf     = !$DOT/bin/git-wtf
         count   = !git shortlog -sn
 [color]
         diff = auto
@@ -15,8 +14,8 @@
         branch = auto
         ui = true
 [core]
-	excludesfile = /Users/fredmontet/.gitignore
-        editor = vim
+	    excludesfile = ~/.gitignore
+        editor = $EDITOR_CLI
 [apply]
         whitespace = nowarn
 [mergetool]
@@ -34,15 +33,9 @@
 [credential]
 	helper = osxkeychain
 [user]
-	name = Frédéric Montet
-	email = fredmontet@gmail.com
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-[mergetool "sourcetree"]
-	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
+	name = $AUTHOR_NAME
+	email = $AUTHOR_EMAIL
 [commit]
-	template = /Users/fredmontet/.stCommitMsg
+	template = ~/.stCommitMsg
 [init]
 	defaultBranch = main

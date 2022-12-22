@@ -7,7 +7,7 @@
 set -e
 
 parentDirectory="$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd -P)"
-dotfilesDirectory="$(cd "$( dirname "$parentDirectory" )" && pwd -P)"
+dotDirectory="$(cd "$( dirname "$parentDirectory" )" && pwd -P)"
 
 displayUsageAndExit() {
 	echo "dot -- dotfiles management"
@@ -15,7 +15,7 @@ displayUsageAndExit() {
 	echo "Usage: dot [options]"
 	echo ""
 	echo "Options:"
-	echo "  -e, --edit    Open dotfiles directory for editing"
+	echo "  -e, --edit    Open dot directory for editing"
 	echo "  -h, --help    Show this help message and exit"
 	exit
 }
@@ -26,7 +26,7 @@ while test $# -gt 0; do
 			displayUsageAndExit
 			;;
 		"-e"|"--edit")
-			exec "$EDITOR" "$dotfilesDirectory"
+			exec "$EDITOR" "$dotDirectory"
 			exit
 			;;
 		*)
@@ -37,11 +37,11 @@ while test $# -gt 0; do
 	shift
 done
 
-export ZSH=$HOME/.dotfiles
+export DOT=$HOME/.dot
 
 # Set OS defaults
-$ZSH/rel/os/reset.sh
+$DOT/rel/os/reset.sh
 
 # Install software
-echo "› $ZSH/install"
-$ZSH/install
+echo "› $DOT/install"
+$DOT/run/install

@@ -4,11 +4,11 @@
 
 set -e
 
-cd "$(dirname $0)"
+cd $DOT
 
 echo "› Run all installers"
-find . -name install.sh 
+find ./rel -name install.sh
 printf "\n"
 
 echo "› Start"
-find . -name install.sh -exec sh -c "{}" \;
+find ./rel -name install.sh -exec sh -c "{}" \;

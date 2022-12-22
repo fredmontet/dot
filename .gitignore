@@ -1,6 +1,9 @@
+# IDE related
+.idea
+
 # Ignore sensitive informations
 rel/os/keys.zsh
-rel/git/gitconfig.local.symlink
+tmp/rel/git/gitconfig.local.symlink
 
 # Ignore all environment variables
 **/env.zsh

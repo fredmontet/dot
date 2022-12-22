@@ -1,6 +1,4 @@
 autoload colors && colors
-# cheers, @ehrenmurdick
-# http://github.com/ehrenmurdick/config/blob/master/zsh/prompt.zsh
 
 if (( $+commands[git] ))
 then
@@ -29,7 +27,6 @@ git_dirty() {
 
 git_prompt_info () {
  ref=$($git symbolic-ref HEAD 2>/dev/null) || return
-# echo "(%{\e[0;33m%}${ref#refs/heads/}%{\e[0m%})"
  echo "${ref#refs/heads/}"
 }
 
@@ -40,7 +37,6 @@ need_push () {
   if [ $($git rev-parse --is-inside-work-tree 2>/dev/null) ]
   then
     number=$($git cherry -v origin/$(git symbolic-ref --short HEAD) 2>/dev/null | wc -l | bc)
-
     if [[ $number == 0 ]]
     then
       echo " "
@@ -54,19 +50,8 @@ directory_name() {
   echo "%{$fg_bold[cyan]%}%1/%\/%{$reset_color%}"
 }
 
-battery_status() {
-  if test ! "$(uname)" = "Darwin"
-  then
-    exit 0
-  fi
-
-  if [[ $(sysctl -n hw.model) == *"Book"* ]]
-  then
-    $ZSH/bin/battery-status
-  fi
-}
-
 export PROMPT=$'\n$(directory_name) $(git_dirty)$(need_push)\n» '
+
 set_prompt () {
   export RPROMPT="%{$fg_bold[cyan]%}%{$reset_color%}"
 }

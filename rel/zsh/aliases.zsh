@@ -1,16 +1,20 @@
-# Basic aliases
-###############
-
+# Shortcuts
+alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
+alias email="echo '$AUTHOR_EMAIL' | pbcopy | echo '=> Mail copied to pasteboard.'"
 alias reload='. ~/.zshrc'
+alias cls='clear'
 
+# Navigation
 alias ..='cd ..'
 alias ...='cd ../..'
-alias cls='clear' # Good 'ol Clear Screen command
-
 alias src='cd ~/src'
-
-# Software aliases
-##################
+if $(gls &>/dev/null)
+then
+  alias ls="gls -F --color"
+  alias l="gls -lAh --color"
+  alias ll="gls -l --color"
+  alias la='gls -A --color'
+fi
 
 # Editors
 alias jl='jupyter lab'
@@ -24,12 +28,6 @@ alias k='kubectl'
 alias lg='lazygit'
 alias tb.ligntning=tensorboard --logdir ./lightning_logs
 alias tb.darts=tensorboard --logdir ./.darts/runs
-
-# Others
-alias openbb='/Applications/OpenBB\ Terminal/OpenBB\ Terminal ; exit;'
-
-# Project aliases
-#################
 
 # Vast Outdoor GmbH
 alias vast.ch='cd ~/src/vast-ch'
@@ -56,7 +54,7 @@ alias p.jam='cd ~/src/jam && poetry shell'
 alias p.tars='cd ~/src/tars && pipenv shell'
 alias p.blog='cd ~/src/blog'
 alias p.experiments='cd ~/src/experiments && make activate'
-alias p.note='cd ~/src/note && pipenv shell'
+alias p.n='cd ~/src/n && pipenv shell'
 
 # Project templates
 alias new.ds='cookiecutter https://github.com/fredmontet/template-data-science'
