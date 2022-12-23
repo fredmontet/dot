@@ -1,9 +1,9 @@
 # IDE related
 .idea
 
-# Ignore sensitive informations
-rel/os/keys.zsh
-tmp/rel/git/gitconfig.local.symlink
-
 # Ignore all environment variables
 **/env.zsh
+
+# Ignore specific files
+rel/git/gitconfig.local.symlink
+rel/brew/Brewfile.lock.json

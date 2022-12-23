@@ -1,0 +1,43 @@
+#!/bin/sh
+
+# `n` is a quick tool to take notes
+# 
+# :params args: arguments of the command
+
+EXT=".md"
+
+NOTE_PATH="~/src/note/docs/notes"
+NOTE_PATH_PRIVATE="$NOTE_PATH/private"
+
+TMP_NOTE_PATH="$NOTE_PATH/tmp$EXT"
+TMP_NOTE_PATH_PRIVATE="$PRIVATE_NOTE_PATH/tmp$EXT"
+
+if [ -n "$1" ] && [ -z "$2" ]; then
+  if [[ "$1" == '-p' ]]; then
+    # Write private temporary n
+    #   Usage: n -p
+    exec $EDITOR_CLI $TMP_NOTE_PATH_PRIVATE 
+
+  elif [[ "$1" == '-l' ]]; then
+    # List all notes (also private ones) 
+    #   Usage: n -l
+    exec tree -L 2 $NOTE_PATH
+
+  else
+    # Write public n
+    #   Usage: n <topic>
+    exec $EDITOR_CLI $NOTE_PATH/$1$EXT
+  fi
+
+# Write private n
+#   Usage: n -p <topic>
+elif [ -n "$1" ] && [ -n "$2" ]; then
+  if [[ "$1" == '-p' ]]; then
+    exec $EDITOR_CLI $NOTE_PATH_PRIVATE/$2$EXT 
+  fi
+  
+# Write temporary n
+#   Usage: n
+else
+	exec $EDITOR_CLI $TMP_NOTE_PATH
+fi

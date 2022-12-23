@@ -1,5 +1,5 @@
 [user]
-        name = AUTHOR_NAME
-        email = AUTHOR_EMAIL
+        name = Fred Montet
+        email = fredmontet@gmail.com
 [credential]
-        helper = GIT_CREDENTIAL_HELPER
+        helper = osxkeychain
