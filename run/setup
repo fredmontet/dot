@@ -2,7 +2,12 @@
 
 # `setup` Setup everything
 
-cd $DOT
+# This variable is only present in this script,
+# Once setup is called, an env variable is set in 
+# the zsh profile.
+
+cd "$(dirname "$0")/.."
+DOT=$(pwd -P)
 
 set -e
 
