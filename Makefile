@@ -1,10 +1,10 @@
-# .jam scripts
+# .dot scripts
 # ============
 
 all: setup install
 
 setup:
-	bin/jam setup
+	run/setup
 
 install:
-	bin/jam install
+	run/install

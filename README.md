@@ -1,8 +1,6 @@
-# .jam
+# .dot
 
 This repository groups my different 'dot files' with a structure inspired from Zack Holman (https://github.com/holman/dotfiles). Following is an explanation of how my dotfiles work.
-
-This project now uses a Python-based CLI (`jam`) to handle setup and installations.
 
 ## Concept
 
@@ -28,8 +26,8 @@ Anything with an extension of `.zsh` will get automatically included into your s
 
 ### Scripts
 
-- `jam setup` (or `make setup`): symlink and configure everything
-- `jam install` (or `make install`): run all installers
+- `setup` : symlink everything
+- `install` : installs everything
 
 ## Get Started
 
@@ -38,47 +36,19 @@ Anything with an extension of `.zsh` will get automatically included into your s
 $ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 # Install the dotfiles
-git clone https://github.com/fredmontet/jam.git ~/.jam
-cd ~/.jam
+git clone https://github.com/fredmontet/dot.git ~/.dot
+cd ~/.dot
 make setup
 ```
 
-This will symlink the appropriate files in `.jam` to your home directory.
+This will symlink the appropriate files in `.dot` to your home directory.
 The main file you'll want to change right off the bat is `zsh/zshrc.symlink`,
 which sets up a few paths that'll be different on your particular machine.
 
 ### Usefull Commands
 
-- `jam` is a simple script that installs some dependencies, sets sane macOS
-defaults, and so on. Tweak this script, and occasionally run `jam` from
+- `dot` is a simple script that installs some dependencies, sets sane macOS
+defaults, and so on. Tweak this script, and occasionally run `dot` from
 time to time to keep your environment fresh and up-to-date. You can find
 this script in `bin/`.
 - `reload` does what it says. It reloads your dotfiles.
- 
-## Development
-
-This project uses [Poetry](https://python-poetry.org/) to manage dependencies and create an isolated virtual environment.
-
-If you don't have Poetry installed, follow the instructions at https://python-poetry.org/docs/#installation.
-
-Install the project dependencies and create the virtual environment:
-```bash
-poetry install
-```
-
-Activate the virtual environment:
-```bash
-poetry shell
-```
-
-You can now run the CLI commands directly:
-```bash
-jam setup
-jam install
-```
-
-Or prefix commands with `poetry run` without activating the shell:
-```bash
-poetry run jam setup
-poetry run jam install
-```

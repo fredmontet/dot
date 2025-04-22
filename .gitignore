@@ -1,17 +1,9 @@
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
-*$py.class
+# IDE related
+.idea
 
-# Virtual environment
-.venv/
+# Ignore all environment variables
+**/env.zsh
 
-# Distribution / packaging
-*.egg-info/
-dist/
-build/
-
-# IDEs and editors
-.idea/
-.vscode/
-*.swp
+# Ignore specific files
+rel/git/gitconfig.local.symlink
+rel/brew/Brewfile.lock.json
