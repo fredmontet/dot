@@ -1,10 +1,31 @@
 #!/bin/sh
-
-# `dot` Handles installation, updates, etc.
 #
-# :param args: command parameters
+# dot
+#
+# `dot` handles installation, updates, things like that. Run it periodically
+# to make sure you're on the latest and greatest.
 
 set -e
+
+info () {
+  printf "\r  [ \033[00;34m..\033[0m ] $1\n"
+}
+
+user () {
+  printf "\r  [ \033[0;33m??\033[0m ] $1\n"
+}
+
+success () {
+  printf "\r\033[2K  [ \033[00;32mOK\033[0m ] $1\n"
+}
+
+fail () {
+  printf "\r\033[2K  [\033[0;31mFAIL\033[0m] $1\n"
+  echo ''
+  exit
+}
+
+info "Installation started"
 
 parentDirectory="$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd -P)"
 dotDirectory="$(cd "$( dirname "$parentDirectory" )" && pwd -P)"
@@ -15,7 +36,7 @@ displayUsageAndExit() {
 	echo "Usage: dot [options]"
 	echo ""
 	echo "Options:"
-	echo "  -e, --edit    Open dot directory for editing"
+	echo "  -e, --edit    Open dotfiles directory for editing"
 	echo "  -h, --help    Show this help message and exit"
 	exit
 }
@@ -39,8 +60,15 @@ done
 
 export DOT=$HOME/.dot
 
-# Set OS defaults
-$DOT/rel/os/reset.sh
+# Reset the OS settings to its default
+$DOT/rel/os/reset.sh || true
 
-# Install software
-$DOT/run/install
+# Upgrade Brew
+info "Upgrading Brew"
+brew upgrade || true
+
+# Install all softwares
+info "Installing or updating all softwares"
+$DOT/run/install || true
+
+success "Installation completed"

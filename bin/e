@@ -1,7 +1,0 @@
-#!/bin/sh
-
-# `e` Quick shortcut to an editor
-#
-# :params args: path of the directory to open
-
-exec "$EDITOR" "${1:-.}"

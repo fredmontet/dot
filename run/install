@@ -26,8 +26,6 @@ fail () {
 
 info "Run following installers"
 find ./rel -name install.sh
-echo ''
 
 info "Start"
 find ./rel -name install.sh -exec sh -c "{}" \;
-echo ''
