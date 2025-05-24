@@ -2,10 +2,8 @@ cask_args appdir: '/Applications'
 
 # Taps
 tap "github/gh"
-tap "heroku/brew"
 tap "homebrew/bundle"
 tap "homebrew/cask"
-tap "homebrew/core"
 tap "homebrew/services"
 tap "pivotal/tap"
 
