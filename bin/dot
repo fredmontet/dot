@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+#
+# dot
+#
+# `dot` handles installation, updates, things like that. Run it periodically
+# to make sure you're on the latest and greatest.
+
+set -e
+
+parentDirectory="$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd -P)"
+dotDirectory="$(cd "$( dirname "$parentDirectory" )" && pwd -P)"
+
+. "$dotDirectory/run/_common.sh"
+
+displayUsageAndExit() {
+	echo "dot -- dotfiles management"
+	echo ""
+	echo "Usage: dot [options]"
+	echo ""
+	echo "Options:"
+	echo "  -e, --edit    Open dotfiles directory for editing"
+	echo "  -h, --help    Show this help message and exit"
+	exit
+}
+
+while test $# -gt 0; do
+	case "$1" in
+		"-h"|"--help")
+			displayUsageAndExit
+			;;
+		"-e"|"--edit")
+			exec "$EDITOR" "$dotDirectory"
+			exit
+			;;
+		*)
+			echo "Invalid option: $1"
+			displayUsageAndExit
+			;;
+	esac
+	shift
+done
+
+info "Installation started"
+
+export DOT="$dotDirectory"
+
+# Pull the latest dotfiles before doing anything else
+info "Updating dotfiles"
+git -C "$DOT" pull --rebase --autostash || true
+
+# Reset the OS settings to its default
+"$DOT/rel/os/reset.sh" || true
+
+# Upgrade Brew
+info "Upgrading Brew"
+brew upgrade || true
+
+# Install all softwares
+info "Installing or updating all softwares"
+"$DOT/run/install" || true
+
+success "Installation completed"

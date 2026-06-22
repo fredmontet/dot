@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+#
+# `lint` Static-check the shell scripts and the zsh config.
+# Run by `make lint` and by CI (.github/workflows/lint.yml).
+
+cd "$(dirname "$0")/.." || exit 1
+DOT=$(pwd -P)
+export DOT
+
+. "$DOT/run/_common.sh"
+
+status=0
+
+# Syntax-check everything that gets sourced into the interactive shell.
+if command -v zsh >/dev/null
+then
+  info "zsh -n on shell config"
+  while IFS= read -r f
+  do
+    zsh -n "$f" || status=1
+  done < <(
+    find "$DOT" -name '*.zsh' -not -path '*/.git/*'
+    echo "$DOT/rel/zsh/zshrc.symlink"
+  )
+else
+  user "zsh not found — skipping zsh syntax checks"
+fi
+
+# Lint the POSIX/bash scripts.
+if command -v shellcheck >/dev/null
+then
+  info "shellcheck on scripts"
+  targets=(run/setup run/install run/lint run/_common.sh bin/dot)
+  while IFS= read -r f
+  do
+    targets+=("$f")
+  done < <(find rel -name '*.sh' -not -path '*/.git/*')
+  # --severity=warning: fail on real problems (warnings/errors), let info-level
+  # style advice through. SC codes we accept on purpose live in .shellcheckrc.
+  shellcheck --severity=warning "${targets[@]}" || status=1
+else
+  user "shellcheck not found — run 'brew bundle' to install it"
+fi
+
+if [ "$status" -eq 0 ]
+then
+  success "lint passed"
+else
+  fail "lint found issues"
+fi

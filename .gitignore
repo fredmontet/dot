@@ -1,0 +1,14 @@
+# IDE related
+.idea
+
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Ignore all environment variables
+**/env.zsh
+
+# Ignore specific files
+rel/git/gitconfig.local.symlink
+rel/brew/Brewfile.lock.json
+rel/ssh/config

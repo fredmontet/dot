@@ -1,0 +1,144 @@
+#!/usr/bin/env bash
+
+# `setup` Setup everything
+
+# This variable is only present in this script,
+# Once setup is called, an env variable is set in 
+# the zsh profile.
+
+cd "$(dirname "$0")/.." || exit 1
+DOT=$(pwd -P)
+
+set -e
+
+. "$DOT/run/_common.sh"
+
+link_file () {
+  local src=$1 dst=$2
+  local overwrite='' backup='' skip=''
+  local action=''
+
+  if [ -f "$dst" ] || [ -d "$dst" ] || [ -L "$dst" ]
+  then
+    if [ "$overwrite_all" == "false" ] && [ "$backup_all" == "false" ] && [ "$skip_all" == "false" ]
+    then
+      local currentSrc; currentSrc="$(readlink "$dst")"
+      if [ "$currentSrc" == "$src" ]
+      then
+        skip=true;
+      else
+        user "File already exists: $dst ($(basename "$src")), what do you want to do?\n\
+        [s]kip, [S]kip all, [o]verwrite, [O]verwrite all, [b]ackup, [B]ackup all?"
+        read -rn 1 action
+        case "$action" in
+          o )
+            overwrite=true;;
+          O )
+            overwrite_all=true;;
+          b )
+            backup=true;;
+          B )
+            backup_all=true;;
+          s )
+            skip=true;;
+          S )
+            skip_all=true;;
+          * )
+            ;;
+        esac
+      fi
+    fi
+
+    overwrite=${overwrite:-$overwrite_all}
+    backup=${backup:-$backup_all}
+    skip=${skip:-$skip_all}
+
+    if [ "$overwrite" == "true" ]
+    then
+      rm -rf "$dst"
+      success "removed $dst"
+    fi
+
+    if [ "$backup" == "true" ]
+    then
+      mv "$dst" "${dst}.backup"
+      success "moved $dst to ${dst}.backup"
+    fi
+
+    if [ "$skip" == "true" ]
+    then
+      success "skipped $src"
+    fi
+  fi
+
+  if [ "$skip" != "true" ]  # "false" or empty
+  then
+    ln -s "$1" "$2"
+    success "linked $1 to $2"
+  fi
+}
+
+setup_git () {
+  cd "$DOT" || exit 1
+  if ! [ -f ./rel/git/gitconfig.local.symlink ]
+  then
+    info 'Setup git'
+    git_credential='cache'
+    if [ "$(uname -s)" == "Darwin" ]
+    then
+      git_credential='osxkeychain'
+    fi
+    user ' - What is your github author name?'
+    read -re git_authorname
+    user ' - What is your github author email?'
+    read -re git_authoremail
+    sed -e "s/AUTHOR_NAME/$git_authorname/g" -e "s/AUTHOR_EMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" ./rel/git/gitconfig.local.symlink.example > ./rel/git/gitconfig.local.symlink
+    success 'git'
+  fi
+}
+
+
+setup_dot () {
+  info 'Setup dot'
+  local overwrite_all=false backup_all=false skip_all=false
+  for src in $(find -H "$DOT" -maxdepth 3 -name '*.symlink' -not -path '*.git*')
+  do
+    dst="$HOME/.$(basename "${src%.*}")"
+    link_file "$src" "$dst"
+  done
+}
+
+setup_ssh () {
+  if [ -f "$DOT/rel/ssh/config" ]
+  then
+    info 'Setup ssh'
+    mkdir -p "$HOME/.ssh"
+    chmod 700 "$HOME/.ssh"
+    link_file "$DOT/rel/ssh/config" "$HOME/.ssh/config"
+  fi
+}
+
+setup_examples () {
+  info 'Scaffold example files'
+  for src in $(find -H "$DOT" -maxdepth 4 -name '*.example' -not -path '*.git*')
+  do
+    dst="${src%.example}"
+    # git's local config is generated with substitutions by setup_git; skip it.
+    if [ "$(basename "$dst")" = "gitconfig.local.symlink" ]
+    then
+      continue
+    fi
+    if [ ! -e "$dst" ]
+    then
+      cp "$src" "$dst"
+      success "scaffolded $dst — edit it to add real values"
+    fi
+  done
+}
+
+setup_git
+setup_ssh
+setup_examples
+setup_dot
+
+success 'Setup completed'

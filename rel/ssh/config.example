@@ -1,0 +1,13 @@
+# ~/.ssh/config — linked here by run/setup's setup_ssh().
+# Keep host-specific secrets / private hostnames out of this (public) file.
+# Put them in ~/.ssh/config.local and uncomment the Include below if needed.
+# Include ~/.ssh/config.local
+
+Host *
+    # UseKeychain is macOS-only; ignore it elsewhere instead of erroring.
+    IgnoreUnknown UseKeychain
+    # Load keys into the agent on first use and store passphrases in the keychain.
+    AddKeysToAgent yes
+    UseKeychain yes
+    # Default identity; add more per-host `IdentityFile` lines as needed.
+    IdentityFile ~/.ssh/id_ed25519

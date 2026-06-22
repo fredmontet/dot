@@ -1,0 +1,5 @@
+# Personal dotfiles: paths contain no spaces, and we `source` dynamically built
+# paths on purpose. Keep the high-signal checks; mute the structural ones that
+# would otherwise be false positives here.
+disable=SC1090,SC1091   # sourced files are resolved at runtime, not lintable here
+disable=SC2044          # `for f in $(find ...)` is fine for our space-free paths

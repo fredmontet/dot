@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+# `install` Run all installers
+
+cd "$(dirname "$0")/.." || exit 1
+DOT=$(pwd -P)
+export DOT
+
+set -e
+
+. "$DOT/run/_common.sh"
+
+info "Run following installers"
+find ./rel -name install.sh
+
+info "Start"
+find ./rel -name install.sh -exec sh {} \;
