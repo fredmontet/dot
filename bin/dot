@@ -59,4 +59,8 @@ brew upgrade || true
 info "Installing or updating all softwares"
 "$DOT/run/install" || true
 
+# Record newly installed brew packages into the Brewfile
+info "Syncing Brewfile"
+"$DOT/rel/brew/sync.sh" || true
+
 success "Installation completed"
