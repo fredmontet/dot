@@ -9,5 +9,8 @@ setup:
 install:
 	run/install
 
+os-update:
+	run/os-update
+
 lint:
 	run/lint

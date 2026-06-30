@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+# `os-update` Install available macOS software updates
+
+cd "$(dirname "$0")/.." || exit 1
+
+set -e
+
+sudo softwareupdate -i -a
